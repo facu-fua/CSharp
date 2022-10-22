@@ -1,0 +1,22 @@
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\bin\Debug\net6.0\1er entrega proyecto final.exe
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\bin\Debug\net6.0\1er entrega proyecto final.deps.json
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\bin\Debug\net6.0\1er entrega proyecto final.runtimeconfig.json
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\bin\Debug\net6.0\1er entrega proyecto final.dll
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\bin\Debug\net6.0\1er entrega proyecto final.pdb
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\bin\Debug\net6.0\System.Data.SqlClient.dll
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\obj\Debug\net6.0\1er entrega proyecto final.csproj.AssemblyReference.cache
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\obj\Debug\net6.0\1er entrega proyecto final.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\obj\Debug\net6.0\1er entrega proyecto final.AssemblyInfoInputs.cache
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\obj\Debug\net6.0\1er entrega proyecto final.AssemblyInfo.cs
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\obj\Debug\net6.0\1er entrega proyecto final.csproj.CoreCompileInputs.cache
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\obj\Debug\net6.0\1er entrega proyecto final.csproj.CopyComplete
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\obj\Debug\net6.0\1er entrega proyecto final.dll
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\obj\Debug\net6.0\refint\1er entrega proyecto final.dll
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\obj\Debug\net6.0\1er entrega proyecto final.pdb
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\obj\Debug\net6.0\1er entrega proyecto final.genruntimeconfig.cache
+C:\Users\Carlos\Desktop\C#\Proyecto\1er entrega proyecto final\obj\Debug\net6.0\ref\1er entrega proyecto final.dll
