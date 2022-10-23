@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 namespace _1er_entrega_proyecto_final.Controles
 {
     internal class VentaController
-    {/*
+    {
+        
         public static List<Venta> Ventas(int idUsuario)
         {
             List<Venta> ventas = new List<Venta>();
@@ -47,20 +48,13 @@ namespace _1er_entrega_proyecto_final.Controles
 
                     ventas.Add(venta);
                 }
-                Console.WriteLine("-------VENTAS-------");
-                foreach (Venta venta in ventas)
-                {
-                    Console.WriteLine("Id: " + venta.Id);
-                    Console.WriteLine("Comentarios: " + venta.Comentarios);
-                    Console.WriteLine("IdUsuario: " + venta.IdUsuario);
-                    Console.WriteLine("------------------------------------- ");
-                }
 
                 reader.Close();
 
                 connection.Close();
 
             }
-        }*/
+            return ventas;
+        } 
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace _1er_entrega_proyecto_final.Controles
 {
     internal class ProductoController
-    {/*
+    {
         public static List<Producto> TraerProducto(int idUsuario)
         {
             var listaProductos = new List<Producto>();
@@ -51,21 +51,10 @@ namespace _1er_entrega_proyecto_final.Controles
                     listaProductos.Add(producto);
 
                 }
-                Console.WriteLine("-------PRODUCTOS-------");
-                foreach (Producto producto in listaProductos)
-                {
-                    Console.WriteLine("Id: " + producto.Id);
-                    Console.WriteLine("Descripcion: " + producto.Descripciones);
-                    Console.WriteLine("Costo: " + producto.Costo);
-                    Console.WriteLine("Precio de venta: " + producto.PrecioVenta);
-                    Console.WriteLine("Stock: " + producto.Stock);
-                    Console.WriteLine("Id del Usuario: " + producto.IdUsuario);
-                    Console.WriteLine("------------------------------------- ");
-                }
-
                 connection.Close();
 
             }
-        }*/
+            return listaProductos;
+        }
     }
 }

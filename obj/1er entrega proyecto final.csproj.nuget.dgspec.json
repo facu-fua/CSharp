@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Carlos\\Desktop\\C#\\Proyecto\\1er entrega proyecto final\\1er entrega proyecto final.csproj": {}
+    "C:\\Users\\Carlos\\Desktop\\C#\\CSharp\\1er entrega proyecto final.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Carlos\\Desktop\\C#\\Proyecto\\1er entrega proyecto final\\1er entrega proyecto final.csproj": {
+    "C:\\Users\\Carlos\\Desktop\\C#\\CSharp\\1er entrega proyecto final.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Carlos\\Desktop\\C#\\Proyecto\\1er entrega proyecto final\\1er entrega proyecto final.csproj",
+        "projectUniqueName": "C:\\Users\\Carlos\\Desktop\\C#\\CSharp\\1er entrega proyecto final.csproj",
         "projectName": "1er entrega proyecto final",
-        "projectPath": "C:\\Users\\Carlos\\Desktop\\C#\\Proyecto\\1er entrega proyecto final\\1er entrega proyecto final.csproj",
+        "projectPath": "C:\\Users\\Carlos\\Desktop\\C#\\CSharp\\1er entrega proyecto final.csproj",
         "packagesPath": "C:\\Users\\Carlos\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Carlos\\Desktop\\C#\\Proyecto\\1er entrega proyecto final\\obj\\",
+        "outputPath": "C:\\Users\\Carlos\\Desktop\\C#\\CSharp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Carlos\\AppData\\Roaming\\NuGet\\NuGet.Config",
