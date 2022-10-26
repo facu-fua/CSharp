@@ -30,7 +30,7 @@ namespace _1er_entrega_proyecto_final.Controles
 
                 SqlCommand cmd = connection.CreateCommand();
 
-                cmd.CommandText = "SELECT * FROM Usuario WHERE NombreUsuario = @user and Contraseña = @pass";
+                cmd.CommandText = "SELECT * FROM Usuario WHERE NombreUsuario = '@user' and Contraseña = '@pass'";
 
                 var parametro = new SqlParameter();
                 parametro.ParameterName = "user";
@@ -81,7 +81,7 @@ namespace _1er_entrega_proyecto_final.Controles
 
                 SqlCommand cmd = connection.CreateCommand();
 
-                cmd.CommandText = "SELECT * FROM Usuario WHERE NombreUsuario = @user";
+                cmd.CommandText = "SELECT * FROM Usuario WHERE NombreUsuario = '@user'";
 
                 var parametro = new SqlParameter();
                 parametro.ParameterName = "user";

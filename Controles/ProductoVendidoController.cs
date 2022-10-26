@@ -16,6 +16,34 @@ namespace _1er_entrega_proyecto_final.Controles
         {
             //creo lista para productos vendidos
             List<ProductoVenta> vendidos = new List<ProductoVenta>();
+            int idVenta = 1;
+
+            SqlConnectionStringBuilder connectionBuilder1 = new SqlConnectionStringBuilder();
+            connectionBuilder1.DataSource = "DESKTOP-HH6P1J3";
+            connectionBuilder1.InitialCatalog = "SistemaGestion";
+            connectionBuilder1.IntegratedSecurity = true;
+
+            var cs1 = connectionBuilder1.ConnectionString;
+
+            using (SqlConnection connection1 = new SqlConnection(cs1))
+            {
+                connection1.Open();
+
+                SqlCommand cmd = connection1.CreateCommand();
+
+                cmd.CommandText = "SELECT Id FROM Venta WHERE IdUsuario = @idUser";
+
+                var parametro = new SqlParameter();
+                parametro.ParameterName = "idUser";
+                parametro.SqlDbType = SqlDbType.BigInt;
+                parametro.Value = id;
+                cmd.Parameters.Add(parametro);
+
+                idVenta = Convert.ToInt32(cmd.ExecuteScalar());
+                
+            }
+
+
 
             //trae una lista de productos del usuario
             List<Producto> productoUsuario = ProductoController.TraerProducto(id);
@@ -33,16 +61,24 @@ namespace _1er_entrega_proyecto_final.Controles
                 using (SqlConnection connection = new SqlConnection(cs))
                 {
                     connection.Open();
+                    
 
                     SqlCommand cmd = connection.CreateCommand();
 
-                    cmd.CommandText = "SELECT * FROM ProductoVendido WHERE IdProducto = @idProduct";
+                    cmd.CommandText = "SELECT * FROM ProductoVendido WHERE IdProducto = @idProducto and IdVenta = @idVenta";
 
                     var parametro = new SqlParameter();
-                    parametro.ParameterName = "idProduct";
+                    parametro.ParameterName = "idVenta";
                     parametro.SqlDbType = SqlDbType.BigInt;
-                    parametro.Value = product.Id;
+                    parametro.Value = idVenta;
+
+                    var parametro2 = new SqlParameter();
+                    parametro2.ParameterName = "idProducto";
+                    parametro2.SqlDbType = SqlDbType.BigInt;
+                    parametro2.Value = product.Id;
+
                     cmd.Parameters.Add(parametro);
+                    cmd.Parameters.Add(parametro2);
 
                     var reader = cmd.ExecuteReader();
                     while(reader.Read())

@@ -19,7 +19,7 @@ class Program
             Console.WriteLine("C) Traer Productos Vendidos por usuario");
             Console.WriteLine("D) Traer Ventas por usuario");
             Console.WriteLine("E) Iniciar Sesion");
-            Console.WriteLine("F) Salir");
+            Console.WriteLine("F) Salir\n");
 
             letra = Console.ReadLine().ToUpper();
             string nombreUsuario;
