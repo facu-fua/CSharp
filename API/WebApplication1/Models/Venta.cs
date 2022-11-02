@@ -13,9 +13,9 @@
             IdUsuario = 0;
         }
 
-        public Venta(int apellido, string comentarios, int idUsuario)
+        public Venta(int id, string comentarios, int idUsuario)
         {
-            Id = apellido;
+            Id = id;
             Comentarios = comentarios;
             IdUsuario = idUsuario;
         }

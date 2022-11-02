@@ -21,5 +21,23 @@ namespace WebApplication1.Controllers
             var result = _producto.TraerProducto(idUsuario);
             return Ok(result);
         }
+
+        [HttpPost]
+        public void CrearProducto(Producto product)
+        {
+            _producto.CrearProducto(product);
+        }
+
+        [HttpPut]
+        public void ModificarProducto(Producto product)
+        {
+            _producto.ModificarProducto(product);
+        }
+
+        [HttpDelete]
+        public void EliminarProducto(int id)
+        {
+            _producto.EliminarProducto(id);
+        }
     }
 }

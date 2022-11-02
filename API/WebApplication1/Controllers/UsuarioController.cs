@@ -21,5 +21,11 @@ namespace WebApplication1.Controllers
             var result = _usuario.TraerUsuario(NombreUsuario);
             return Ok(result);
         }
+
+        [HttpPut]
+        public void ModificarUsuario(Usuario user)
+        {
+            _usuario.ModificarUsuario(user);
+        }
     }
 }

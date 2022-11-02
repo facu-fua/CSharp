@@ -96,5 +96,11 @@ namespace WebApplication1.Repository
             }
             return vendidos;
         }
+
+        public void CargarProductosVendidos(List<ProductoVenta> productosVendidos)
+        {
+
+        }
+
     }
 }
