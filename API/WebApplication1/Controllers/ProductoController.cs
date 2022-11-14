@@ -23,15 +23,15 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public void CrearProducto(Producto product)
+        public void CrearProducto(string descripciones, float costo, float precioVenta, int stock, int idUsuario)
         {
-            _producto.CrearProducto(product);
+            _producto.CrearProducto(descripciones, costo, precioVenta, stock, idUsuario);
         }
 
         [HttpPut]
-        public void ModificarProducto(Producto product)
+        public void ModificarProducto(int id, string descripciones, float costo, float precioVenta, int stock, int idUsuario)
         {
-            _producto.ModificarProducto(product);
+            _producto.ModificarProducto(id, descripciones, costo, precioVenta, stock, idUsuario);
         }
 
         [HttpDelete]

@@ -2,6 +2,7 @@
 using System.Data;
 using WebApplication1.Controllers;
 using WebApplication1.Models;
+using System.Data.Common;
 
 namespace WebApplication1.Repository
 {
@@ -100,6 +101,47 @@ namespace WebApplication1.Repository
         public void CargarProductosVendidos(List<ProductoVenta> productosVendidos)
         {
 
+        }
+
+        public List<ProductoVenta> TraerProductosVendidos()
+        {
+            List<ProductoVenta> productosVendidos = new List<ProductoVenta>();//modificar con otro modelo
+
+            SqlConnectionStringBuilder connectionBuilder = new SqlConnectionStringBuilder();
+            connectionBuilder.DataSource = "DESKTOP-HH6P1J3";
+            connectionBuilder.InitialCatalog = "SistemaGestion";
+            connectionBuilder.IntegratedSecurity = true;
+
+            var cs = connectionBuilder.ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(cs))
+            {
+                connection.Open();
+
+                SqlCommand cmd = connection.CreateCommand();
+
+                cmd.CommandText = "SELECT * FROM ProductoVendido"; //modificar con otro modelo
+
+                var reader = cmd.ExecuteReader();
+
+                while (reader.Read()) //modificar con otro modelo
+                {
+                   
+                        var producto = new ProductoVenta();
+                        producto.Id = Convert.ToInt32(reader.GetValue(0));
+                        producto.Stock = Convert.ToInt32(reader.GetValue(1));
+                        producto.IdProducto = Convert.ToInt32(reader.GetValue(2));
+                        producto.IdVenta = Convert.ToInt32(reader.GetValue(3));
+
+                        productosVendidos.Add(producto);
+                }
+
+                reader.Close();
+
+                connection.Close();
+            }
+
+            return productosVendidos;
         }
 
     }

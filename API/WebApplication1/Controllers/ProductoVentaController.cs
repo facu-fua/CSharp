@@ -5,7 +5,7 @@ using WebApplication1.Repository;
 
 namespace WebApplication1.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
     public class ProductoVentaController : ControllerBase
     {
@@ -15,6 +15,7 @@ namespace WebApplication1.Controllers
             _ProductoVenta = new ADO_ProductoVenta();
         }
 
+        [Route("api/TraerProductoVendido")]
         [HttpGet]
         public ActionResult TraerProductoVendido(int id)
         {
@@ -22,5 +23,14 @@ namespace WebApplication1.Controllers
             return Ok(result);
         }
 
+        [Route("api/TraerProductosVendidos")]
+        [HttpGet]
+        public ActionResult TraerProductosVendidos()
+        {
+            var result = _ProductoVenta.TraerProductosVendidos(); //no trae el primero elemento, arreglar, eliminar el weather
+            return Ok(result);
+        }
+
     }
+
 }
