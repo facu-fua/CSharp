@@ -25,9 +25,9 @@ namespace WebApplication1.Controllers
 
         [Route("api/TraerNombre")]
         [HttpGet]
-        public ActionResult TraerNombre(string user)
+        public ActionResult TraerNombre(int id)
         {
-            var result = _usuario.TraerNombre(user);
+            var result = _usuario.TraerNombre(id);
             return Ok(result);
         }
 
@@ -42,20 +42,28 @@ namespace WebApplication1.Controllers
 
         [Route("api/ModificarUsuario")]
         [HttpPut]
-        public ActionResult ModificarUsuario(Usuario user)
+        public ActionResult ModificarUsuario(int id, string nombre, string apellido, string nombreUsuario, string password, string mail)
         {
-            _usuario.ModificarUsuario(user);
+            _usuario.ModificarUsuario(id, nombre, apellido, nombreUsuario, password, mail);
             var mensaje = "Usuario modificado con exito!";
             return Ok(mensaje);
         }
 
         [Route("api/EliminarUsuario")]
         [HttpDelete]
-        public ActionResult EliminarUsuario(string user)
+        public ActionResult EliminarUsuario(int idUsuario)
         {
-            _usuario.EliminarUsuario(user);
+            _usuario.EliminarUsuario(idUsuario);
             var mensaje = "Usuario eliminado con exito!";
             return Ok(mensaje);
+        }
+
+        [Route("api/Login")]
+        [HttpGet]
+        public ActionResult Login(string nombreUsuario, string password)
+        {
+            var result = _usuario.Login(nombreUsuario, password);
+            return Ok(result);
         }
     }
 }

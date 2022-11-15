@@ -8,148 +8,114 @@ namespace WebApplication1.Repository
     {
         public Usuario TraerUsuario(string nombreUsuario)
         {
-            Usuario user = new Usuario();
 
-            SqlConnectionStringBuilder connectionBuilder = new SqlConnectionStringBuilder();
-            connectionBuilder.DataSource = "DESKTOP-HH6P1J3";
-            connectionBuilder.InitialCatalog = "SistemaGestion";
-            connectionBuilder.IntegratedSecurity = true;
-
-            var cs = connectionBuilder.ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(cs))
+            Usuario usuario = new Usuario();
+            using (SqlConnection connection = new SqlConnection(Conexion.ConexionString()))
             {
                 connection.Open();
 
                 SqlCommand cmd = connection.CreateCommand();
 
-                cmd.CommandText = "SELECT * FROM Usuario WHERE NombreUsuario = '@user'";
+                cmd.CommandText = "SELECT * FROM Usuario WHERE NombreUsuario = @nombre";
 
                 var parametro = new SqlParameter();
-                parametro.ParameterName = "user";
+                parametro.ParameterName = "nombre";
                 parametro.SqlDbType = SqlDbType.VarChar;
                 parametro.Value = nombreUsuario;
-
                 cmd.Parameters.Add(parametro);
 
                 var reader = cmd.ExecuteReader();
-                while (reader.Read()) // aca falta algo porque no esta guardando los datos
+
+                while (reader.Read())
                 {
-                    user.Id = Convert.ToInt32(reader.GetValue(0));
-                    user.Nombre = reader.GetValue(1).ToString();
-                    user.Apellido = reader.GetValue(2).ToString();
-                    user.NombreUsuario = reader.GetValue(3).ToString();
-                    user.Password = reader.GetValue(4).ToString();
-                    user.Mail = reader.GetValue(5).ToString();
+                    usuario.Id = Convert.ToInt32(reader.GetValue(0));
+                    usuario.Nombre = reader.GetValue(1).ToString();
+                    usuario.Apellido = reader.GetValue(2).ToString();
+                    usuario.NombreUsuario = reader.GetValue(3).ToString();
+                    usuario.Password = reader.GetValue(4).ToString();
+                    usuario.Mail = reader.GetValue(5).ToString();
                 }
-
                 reader.Close();
-
                 connection.Close();
 
             }
-            return user;
+            return usuario;
 
-        } //no trae nada
+        } 
 
-        public string TraerNombre(string user)
+        public string TraerNombre(int id)
         {
             string nombre;
-
-            SqlConnectionStringBuilder connectionBuilder = new SqlConnectionStringBuilder();
-            connectionBuilder.DataSource = "DESKTOP-HH6P1J3";
-            connectionBuilder.InitialCatalog = "SistemaGestion";
-            connectionBuilder.IntegratedSecurity = true;
-
-            var cs = connectionBuilder.ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(cs))
+            using (SqlConnection connection = new SqlConnection(Conexion.ConexionString()))
             {
                 connection.Open();
 
                 SqlCommand cmd = connection.CreateCommand();
 
-                cmd.CommandText = "SELECT Nombre FROM Usuario WHERE NombreUsuario = '@user'";
-
+                cmd.CommandText = "SELECT Nombre FROM Usuario WHERE Id = @id";
                 var parametro = new SqlParameter();
-                parametro.ParameterName = "user";
-                parametro.SqlDbType = SqlDbType.VarChar;
-                parametro.Value = user;
+                parametro.ParameterName = "id";
+                parametro.SqlDbType = SqlDbType.BigInt;
+                parametro.Value = id;
 
                 cmd.Parameters.Add(parametro);
 
-                if(cmd.ExecuteScalar() != null)
+                if ((string)cmd.ExecuteScalar() != null)
                 {
                     nombre = cmd.ExecuteScalar().ToString();
                 }
                 else
                 {
-                    nombre = null;
+                    nombre = "Error, usuario no encontrado!";
                 }
-                
-                
                 connection.Close();
 
             }
-            if (string.IsNullOrEmpty(nombre))
-            {
-                string mensaje = "El usuario no existe";
-                return mensaje;
-
-            }else
-            {
-                return nombre;
-            }
+            return nombre;
             
-        } //error con el executescalar
+        }
 
-        public void ModificarUsuario(Usuario usuario)
+        public void ModificarUsuario(int id, string nombre, string apellido, string nombreUsuario, string password, string mail)
         {
-            SqlConnectionStringBuilder connectionBuilder = new SqlConnectionStringBuilder();
-            connectionBuilder.DataSource = "DESKTOP-HH6P1J3";
-            connectionBuilder.InitialCatalog = "SistemaGestion";
-            connectionBuilder.IntegratedSecurity = true;
 
-            var cs = connectionBuilder.ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(cs))
+            using (SqlConnection connection = new SqlConnection(Conexion.ConexionString()))
             {
                 connection.Open();
 
                 SqlCommand cmd = connection.CreateCommand();
 
-                cmd.CommandText = "UPDATE Usuario SET Nombre='@nombre', Apellido='@apellido', NombreUsuario='@nameUser'," +
-                    " Contraseña = '@contrasenia', Mail='@mail' WHERE Id = @id";
+                cmd.CommandText = "UPDATE Usuario SET Nombre=@nombre, Apellido=@apellido, NombreUsuario=@nameUser," +
+                    " Contraseña = @contrasenia, Mail=@mail WHERE Id = @id";
 
                 var parametro = new SqlParameter();
                 parametro.ParameterName = "id";
                 parametro.SqlDbType = SqlDbType.BigInt;
-                parametro.Value = usuario.Id;
+                parametro.Value = id;
 
                 var parametro1 = new SqlParameter();
-                parametro.ParameterName = "nombre";
-                parametro.SqlDbType = SqlDbType.VarChar;
-                parametro.Value = usuario.Nombre;
+                parametro1.ParameterName = "nombre";
+                parametro1.SqlDbType = SqlDbType.VarChar;
+                parametro1.Value = nombre;
 
                 var parametro2 = new SqlParameter();
-                parametro.ParameterName = "apellido";
-                parametro.SqlDbType = SqlDbType.VarChar;
-                parametro.Value = usuario.Apellido;
+                parametro2.ParameterName = "apellido";
+                parametro2.SqlDbType = SqlDbType.VarChar;
+                parametro2.Value = apellido;
 
                 var parametro3 = new SqlParameter();
-                parametro.ParameterName = "nameUser";
-                parametro.SqlDbType = SqlDbType.VarChar;
-                parametro.Value = usuario.NombreUsuario;
+                parametro3.ParameterName = "nameUser";
+                parametro3.SqlDbType = SqlDbType.VarChar;
+                parametro3.Value = nombreUsuario;
 
                 var parametro4 = new SqlParameter();
-                parametro.ParameterName = "contrasenia";
-                parametro.SqlDbType = SqlDbType.VarChar;
-                parametro.Value = usuario.Password;
+                parametro4.ParameterName = "contrasenia";
+                parametro4.SqlDbType = SqlDbType.VarChar;
+                parametro4.Value = password;
 
                 var parametro5 = new SqlParameter();
-                parametro.ParameterName = "mail";
-                parametro.SqlDbType = SqlDbType.VarChar;
-                parametro.Value = usuario.Mail;
+                parametro5.ParameterName = "mail";
+                parametro5.SqlDbType = SqlDbType.VarChar;
+                parametro5.Value = mail;
 
                 cmd.Parameters.Add(parametro);
                 cmd.Parameters.Add(parametro1);
@@ -165,28 +131,21 @@ namespace WebApplication1.Repository
             }
         }
 
-        public void EliminarUsuario(string nombreUsuario)
+        public void EliminarUsuario(int IdUsuario)
         {
-            string mensaje;
-            SqlConnectionStringBuilder connectionBuilder = new SqlConnectionStringBuilder();
-            connectionBuilder.DataSource = "DESKTOP-HH6P1J3";
-            connectionBuilder.InitialCatalog = "SistemaGestion";
-            connectionBuilder.IntegratedSecurity = true;
 
-            var cs = connectionBuilder.ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(cs))
+            using (SqlConnection connection = new SqlConnection(Conexion.ConexionString()))
             {
                 connection.Open();
 
                 SqlCommand cmd = connection.CreateCommand();
 
-                cmd.CommandText = "DELETE FROM Usuario WHERE NombreUsuario='@user'";
+                cmd.CommandText = "DELETE FROM Usuario WHERE Id = @id";
 
                 var parametro = new SqlParameter();
-                parametro.ParameterName = "user";
-                parametro.SqlDbType = SqlDbType.VarChar;
-                parametro.Value = nombreUsuario;
+                parametro.ParameterName = "id";
+                parametro.SqlDbType = SqlDbType.BigInt;
+                parametro.Value = IdUsuario;
                 cmd.Parameters.Add(parametro);
 
                 cmd.ExecuteNonQuery();
@@ -194,25 +153,19 @@ namespace WebApplication1.Repository
 
                 connection.Close();
             }
-        } //lo mismo que el eliminarproducto
+        }
 
-        public void CrearUsuario(string nombre, string apellido, string nombreUsuario, string password, string mail)//agregar al controller con mensaje
+        public void CrearUsuario(string nombre, string apellido, string nombreUsuario, string password, string mail)
         {
-            SqlConnectionStringBuilder connectionBuilder = new SqlConnectionStringBuilder();
-            connectionBuilder.DataSource = "DESKTOP-HH6P1J3";
-            connectionBuilder.InitialCatalog = "SistemaGestion";
-            connectionBuilder.IntegratedSecurity = true;
 
-            var cs = connectionBuilder.ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(cs))
+            using (SqlConnection connection = new SqlConnection(Conexion.ConexionString()))
             {
                 connection.Open();
 
                 SqlCommand cmd = connection.CreateCommand();
 
                 cmd.CommandText = "INSERT INTO Usuario (Nombre,Apellido,NombreUsuario,Contraseña,Mail) " +
-                    "VALUES('@nombre','@apellido','@nameUser','@contrasenia','@mail')";
+                    "VALUES(@nombre,@apellido,@nameUser,@contrasenia,@mail)";
 
                 var parametro = new SqlParameter();
                 parametro.ParameterName = "nombre";
@@ -220,24 +173,24 @@ namespace WebApplication1.Repository
                 parametro.Value = nombre;
 
                 var parametro1 = new SqlParameter();
-                parametro.ParameterName = "apellido";
-                parametro.SqlDbType = SqlDbType.VarChar;
-                parametro.Value = apellido;
+                parametro1.ParameterName = "apellido";
+                parametro1.SqlDbType = SqlDbType.VarChar;
+                parametro1.Value = apellido;
 
                 var parametro2 = new SqlParameter();
-                parametro.ParameterName = "nameUser";
-                parametro.SqlDbType = SqlDbType.VarChar;
-                parametro.Value = nombreUsuario;
+                parametro2.ParameterName = "nameUser";
+                parametro2.SqlDbType = SqlDbType.VarChar;
+                parametro2.Value = nombreUsuario;
 
                 var parametro3 = new SqlParameter();
-                parametro.ParameterName = "contrasenia";
-                parametro.SqlDbType = SqlDbType.VarChar;
-                parametro.Value = password;
+                parametro3.ParameterName = "contrasenia";
+                parametro3.SqlDbType = SqlDbType.VarChar;
+                parametro3.Value = password;
 
                 var parametro4 = new SqlParameter();
-                parametro.ParameterName = "mail";
-                parametro.SqlDbType = SqlDbType.VarChar;
-                parametro.Value = mail;
+                parametro4.ParameterName = "mail";
+                parametro4.SqlDbType = SqlDbType.VarChar;
+                parametro4.Value = mail;
 
                 cmd.Parameters.Add(parametro);
                 cmd.Parameters.Add(parametro1);
@@ -254,23 +207,17 @@ namespace WebApplication1.Repository
 
         public string Login(string nombreUsuario, string password)
         {
-            string mensaje;
-            int id;
+            string mensaje = string.Empty;
+            int id = 0;
+            string nombre = string.Empty;
 
-            SqlConnectionStringBuilder connectionBuilder = new SqlConnectionStringBuilder();
-            connectionBuilder.DataSource = "DESKTOP-HH6P1J3";
-            connectionBuilder.InitialCatalog = "SistemaGestion";
-            connectionBuilder.IntegratedSecurity = true;
-
-            var cs = connectionBuilder.ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(cs))
+            using (SqlConnection connection = new SqlConnection(Conexion.ConexionString()))
             {
                 connection.Open();
 
                 SqlCommand cmd = connection.CreateCommand();
 
-                cmd.CommandText = "SELECT * FROM Usuario WHERE NombreUsuario = '@user' and Contraseña = '@pass'";
+                cmd.CommandText = "SELECT * FROM Usuario WHERE NombreUsuario = @user and Contraseña = @pass";
 
                 var parametro = new SqlParameter();
                 parametro.ParameterName = "user";
@@ -290,11 +237,8 @@ namespace WebApplication1.Repository
                 while (reader.Read())
                 {
                   id = Convert.ToInt32(reader.GetValue(0));
+                  nombre = reader.GetValue(1).ToString();
                 }
-
-                reader.Close();
-
-                connection.Close();
 
                 if (id == 0)
                 {
@@ -302,8 +246,11 @@ namespace WebApplication1.Repository
                 }
                 else
                 {
-                    mensaje = "Ingreso exitoso. Bienvenido" + reader.GetValue(1).ToString();
+                    mensaje = "Ingreso exitoso. Bienvenido " + nombre;
                 }
+                reader.Close();
+
+                connection.Close();
 
             }
             return mensaje;
@@ -311,6 +258,4 @@ namespace WebApplication1.Repository
         }
     }
 
-    
-    
 }

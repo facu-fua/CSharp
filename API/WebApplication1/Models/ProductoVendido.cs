@@ -7,7 +7,6 @@
         public int Stock { get; set; }
         public int IdProducto { get; set; }
         public int IdVenta { get; set; }
-        //modificar atributos, ej: costoFinal = stock*precioVenta, quitar idProducto
         public ProductoVendido()
         {
             Nombre = string.Empty;

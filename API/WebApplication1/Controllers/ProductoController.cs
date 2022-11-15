@@ -5,7 +5,7 @@ using WebApplication1.Repository;
 
 namespace WebApplication1.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
     public class ProductoController : ControllerBase
     {
@@ -15,6 +15,7 @@ namespace WebApplication1.Controllers
             _producto = new ADO_Producto();
         }
 
+        [Route("api/TraerProducto")]
         [HttpGet]
         public ActionResult TraerProducto(int idUsuario)
         {
@@ -22,22 +23,31 @@ namespace WebApplication1.Controllers
             return Ok(result);
         }
 
+        [Route("api/CrearProducto")]
         [HttpPost]
-        public void CrearProducto(string descripciones, float costo, float precioVenta, int stock, int idUsuario)
+        public ActionResult CrearProducto(string descripciones, float costo, float precioVenta, int stock, int idUsuario)
         {
             _producto.CrearProducto(descripciones, costo, precioVenta, stock, idUsuario);
+            var mensaje = "Producto creado con exito!";
+            return Ok(mensaje);
         }
 
+        [Route("api/ModificarProducto")]
         [HttpPut]
-        public void ModificarProducto(int id, string descripciones, float costo, float precioVenta, int stock, int idUsuario)
+        public ActionResult ModificarProducto(int id, string descripciones, float costo, float precioVenta, int stock, int idUsuario)
         {
             _producto.ModificarProducto(id, descripciones, costo, precioVenta, stock, idUsuario);
+            var mensaje = "Producto modificado con exito!";
+            return Ok(mensaje);
         }
 
+        [Route("api/EliminarProducto")]
         [HttpDelete]
-        public void EliminarProducto(int id)
+        public ActionResult EliminarProducto(int id)
         {
             _producto.EliminarProducto(id);
+            var mensaje = "Producto eliminado con exito!";
+            return Ok(mensaje);
         }
     }
 }

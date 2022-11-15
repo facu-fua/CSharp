@@ -27,7 +27,7 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult TraerProductosVendidos()
         {
-            var result = _ProductoVenta.TraerProductosVendidos(); //no trae el primero elemento, arreglar, eliminar el weather
+            var result = _ProductoVenta.TraerProductosVendidos();
             return Ok(result);
         }
 

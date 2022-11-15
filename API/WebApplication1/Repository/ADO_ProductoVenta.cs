@@ -49,14 +49,7 @@ namespace WebApplication1.Repository
             //productoUsuario.ForEach(Producto<>)
             foreach (Producto product in productoUsuario)
             {
-                SqlConnectionStringBuilder connectionBuilder = new SqlConnectionStringBuilder();
-                connectionBuilder.DataSource = "DESKTOP-HH6P1J3";
-                connectionBuilder.InitialCatalog = "SistemaGestion";
-                connectionBuilder.IntegratedSecurity = true;
-
-                var cs = connectionBuilder.ConnectionString;
-
-                using (SqlConnection connection = new SqlConnection(cs))
+                using (SqlConnection connection = new SqlConnection(Conexion.ConexionString()))
                 {
                     connection.Open();
 
@@ -98,33 +91,21 @@ namespace WebApplication1.Repository
             return vendidos;
         }
 
-        public void CargarProductosVendidos(List<ProductoVenta> productosVendidos)
-        {
-
-        }
-
         public List<ProductoVenta> TraerProductosVendidos()
         {
-            List<ProductoVenta> productosVendidos = new List<ProductoVenta>();//modificar con otro modelo
+            List<ProductoVenta> productosVendidos = new List<ProductoVenta>();
 
-            SqlConnectionStringBuilder connectionBuilder = new SqlConnectionStringBuilder();
-            connectionBuilder.DataSource = "DESKTOP-HH6P1J3";
-            connectionBuilder.InitialCatalog = "SistemaGestion";
-            connectionBuilder.IntegratedSecurity = true;
-
-            var cs = connectionBuilder.ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(cs))
+            using (SqlConnection connection = new SqlConnection(Conexion.ConexionString()))
             {
                 connection.Open();
 
                 SqlCommand cmd = connection.CreateCommand();
 
-                cmd.CommandText = "SELECT * FROM ProductoVendido"; //modificar con otro modelo
+                cmd.CommandText = "SELECT * FROM ProductoVendido";
 
                 var reader = cmd.ExecuteReader();
 
-                while (reader.Read()) //modificar con otro modelo
+                while (reader.Read())
                 {
                    
                         var producto = new ProductoVenta();

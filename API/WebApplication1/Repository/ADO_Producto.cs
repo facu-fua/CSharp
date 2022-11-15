@@ -10,14 +10,7 @@ namespace WebApplication1.Repository
         {
             var listaProductos = new List<Producto>();
 
-            SqlConnectionStringBuilder connectionBuilder = new SqlConnectionStringBuilder();
-            connectionBuilder.DataSource = "DESKTOP-HH6P1J3";
-            connectionBuilder.InitialCatalog = "SistemaGestion";
-            connectionBuilder.IntegratedSecurity = true;
-
-            var cs = connectionBuilder.ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(cs))
+            using (SqlConnection connection = new SqlConnection(Conexion.ConexionString()))
             {
                 connection.Open();
 
@@ -55,21 +48,15 @@ namespace WebApplication1.Repository
 
         public void CrearProducto(string descripciones, float costo, float precioVenta, int stock, int idUsuario)
         {
-            SqlConnectionStringBuilder connectionBuilder = new SqlConnectionStringBuilder();
-            connectionBuilder.DataSource = "DESKTOP-HH6P1J3";
-            connectionBuilder.InitialCatalog = "SistemaGestion";
-            connectionBuilder.IntegratedSecurity = true;
 
-            var cs = connectionBuilder.ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(cs))
+            using (SqlConnection connection = new SqlConnection(Conexion.ConexionString()))
             {
                 connection.Open();
 
                 SqlCommand cmd = connection.CreateCommand();
 
                 cmd.CommandText = "INSERT INTO Producto (Descripciones,Costo,PrecioVenta,Stock,IdUsuario) VALUES" +
-                    "('@descripcion',@costo,@precio,@stock,@idusuario)";
+                    "(@descripcion,@costo,@precio,@stock,@idusuario)";
 
                 var parametro = new SqlParameter();
                 parametro.ParameterName = "descripcion";
@@ -78,27 +65,27 @@ namespace WebApplication1.Repository
                 cmd.Parameters.Add(parametro);
 
                 var parametro1 = new SqlParameter();
-                parametro.ParameterName = "costo";
-                parametro.SqlDbType = SqlDbType.Money;
-                parametro.Value = costo;
+                parametro1.ParameterName = "costo";
+                parametro1.SqlDbType = SqlDbType.Money;
+                parametro1.Value = costo;
                 cmd.Parameters.Add(parametro1);
 
                 var parametro2 = new SqlParameter();
-                parametro.ParameterName = "precio";
-                parametro.SqlDbType = SqlDbType.Money;
-                parametro.Value = precioVenta;
+                parametro2.ParameterName = "precio";
+                parametro2.SqlDbType = SqlDbType.Money;
+                parametro2.Value = precioVenta;
                 cmd.Parameters.Add(parametro2);
 
                 var parametro3 = new SqlParameter();
-                parametro.ParameterName = "stock";
-                parametro.SqlDbType = SqlDbType.Int;
-                parametro.Value = stock;
+                parametro3.ParameterName = "stock";
+                parametro3.SqlDbType = SqlDbType.Int;
+                parametro3.Value = stock;
                 cmd.Parameters.Add(parametro3);
 
                 var parametro4 = new SqlParameter();
-                parametro.ParameterName = "idusuario";
-                parametro.SqlDbType = SqlDbType.BigInt;
-                parametro.Value = idUsuario;
+                parametro4.ParameterName = "idusuario";
+                parametro4.SqlDbType = SqlDbType.BigInt;
+                parametro4.Value = idUsuario;
                 cmd.Parameters.Add(parametro4);
 
                 cmd.ExecuteNonQuery();
@@ -109,23 +96,15 @@ namespace WebApplication1.Repository
             }
 
         }
-        //verificar
         public void ModificarProducto(int id,string descripciones, float costo, float precioVenta, int stock, int idUsuario)
         {
-            SqlConnectionStringBuilder connectionBuilder = new SqlConnectionStringBuilder();
-            connectionBuilder.DataSource = "DESKTOP-HH6P1J3";
-            connectionBuilder.InitialCatalog = "SistemaGestion";
-            connectionBuilder.IntegratedSecurity = true;
-
-            var cs = connectionBuilder.ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(cs))
+            using (SqlConnection connection = new SqlConnection(Conexion.ConexionString()))
             {
                 connection.Open();
 
                 SqlCommand cmd = connection.CreateCommand();
 
-                cmd.CommandText = "UPDATE Producto SET Descripciones='@descripcion', Costo=@costo, PrecioVenta=@precio," +
+                cmd.CommandText = "UPDATE Producto SET Descripciones=@descripcion, Costo=@costo, PrecioVenta=@precio," +
                     " Stock = @stock, IdUsuario=@idusuario WHERE Id = @id";
 
                 var parametro = new SqlParameter();
@@ -135,33 +114,33 @@ namespace WebApplication1.Repository
                 cmd.Parameters.Add(parametro);
 
                 var parametro1 = new SqlParameter();
-                parametro.ParameterName = "costo";
-                parametro.SqlDbType = SqlDbType.Money;
-                parametro.Value = costo;
+                parametro1.ParameterName = "costo";
+                parametro1.SqlDbType = SqlDbType.Money;
+                parametro1.Value = costo;
                 cmd.Parameters.Add(parametro1);
 
                 var parametro2 = new SqlParameter();
-                parametro.ParameterName = "precio";
-                parametro.SqlDbType = SqlDbType.Money;
-                parametro.Value = precioVenta;
+                parametro2.ParameterName = "precio";
+                parametro2.SqlDbType = SqlDbType.Money;
+                parametro2.Value = precioVenta;
                 cmd.Parameters.Add(parametro2);
 
                 var parametro3 = new SqlParameter();
-                parametro.ParameterName = "stock";
-                parametro.SqlDbType = SqlDbType.Int;
-                parametro.Value = stock;
+                parametro3.ParameterName = "stock";
+                parametro3.SqlDbType = SqlDbType.Int;
+                parametro3.Value = stock;
                 cmd.Parameters.Add(parametro3);
 
                 var parametro4 = new SqlParameter();
-                parametro.ParameterName = "idusuario";
-                parametro.SqlDbType = SqlDbType.BigInt;
-                parametro.Value = idUsuario;
+                parametro4.ParameterName = "idusuario";
+                parametro4.SqlDbType = SqlDbType.BigInt;
+                parametro4.Value = idUsuario;
                 cmd.Parameters.Add(parametro4);
 
                 var parametro5 = new SqlParameter();
-                parametro.ParameterName = "id";
-                parametro.SqlDbType = SqlDbType.BigInt;
-                parametro.Value = id;
+                parametro5.ParameterName = "id";
+                parametro5.SqlDbType = SqlDbType.BigInt;
+                parametro5.Value = id;
                 cmd.Parameters.Add(parametro5);
 
                 cmd.ExecuteNonQuery();
@@ -170,17 +149,10 @@ namespace WebApplication1.Repository
                 connection.Close();
             }
         }
-        //verificar que pasa si no existe o si se dejan sin completar algun campo
+        
         public void EliminarProducto(int idProducto)
         {
-            SqlConnectionStringBuilder connectionBuilder = new SqlConnectionStringBuilder();
-            connectionBuilder.DataSource = "DESKTOP-HH6P1J3";
-            connectionBuilder.InitialCatalog = "SistemaGestion";
-            connectionBuilder.IntegratedSecurity = true;
-
-            var cs = connectionBuilder.ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(cs))
+            using (SqlConnection connection = new SqlConnection(Conexion.ConexionString()))
             {
                 connection.Open();
 
@@ -199,9 +171,7 @@ namespace WebApplication1.Repository
 
                 connection.Close();
             }
-        } //verificar que funcione, como mandar mensaje si no existe?
-
-        
+        } 
 
     }
  
